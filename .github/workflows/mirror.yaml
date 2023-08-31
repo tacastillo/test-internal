@@ -24,7 +24,7 @@ jobs:
 
       - name: debug
         run: |
-          ls -R temp
+          ls -R
           echo "PURINA_OPEN_DIR_PATH: ${{ env.PURINA_OPEN_DIR_PATH }}"
       # - name: Set up Python 3.11
       #   uses: actions/setup-python@v4
