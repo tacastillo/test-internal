@@ -24,10 +24,10 @@ jobs:
       - name: Trim the cone from the sparse checkout
         run: |
           mkdir -p /tmp/purina-open
-          mv ${{ env.PURINA_OPEN_DIR_PATH }}/* /tmp/purina-open
+          mv -f ${{ env.PURINA_OPEN_DIR_PATH }}/* /tmp/purina-open
           rm -rf *
           mv /tmp/purina-open .
-          ls -R
+          ls -R -a
       - name: Set up Python 3.11
         uses: actions/setup-python@v4
         with:
@@ -52,7 +52,7 @@ jobs:
               os.remove(match)
         shell: python
       - name: debug
-        run: ls -R
+        run: ls -R -a
       # - name: Commit files
       #   run: |
       #     ls -a
