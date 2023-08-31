@@ -27,6 +27,7 @@ jobs:
           mv ${{ env.PURINA_OPEN_DIR_PATH }}/* /tmp/purina-open
           rm -rf *
           mv /tmp/purina-open .
+          ls -R
       - name: Set up Python 3.11
         uses: actions/setup-python@v4
         with:
