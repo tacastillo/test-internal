@@ -24,10 +24,11 @@ jobs:
 
       - name: debug
         run: |
-          mv ${{ env.PURINA_OPEN_DIR_PATH }}/* .
-          rm -rf !${{ env.PURINA_OPEN_DIR_PATH }}
+          touch /tmp/purina-open
+          mv ${{ env.PURINA_OPEN_DIR_PATH }} /tmp/purina-open
+          rm -rf *
+          mv /tmp/purina-open .
           ls -R
-          echo "PURINA_OPEN_DIR_PATH: ${{ env.PURINA_OPEN_DIR_PATH }}"
       # - name: Set up Python 3.11
       #   uses: actions/setup-python@v4
       #   with:
