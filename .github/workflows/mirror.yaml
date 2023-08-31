@@ -18,12 +18,14 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref }}
-          fetch-depth: 0
+          fetch-depth: 1
           sparse-checkout: ${{ env.PURINA_OPEN_DIR_PATH }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: debug
         run: |
+          mv ${{ env.PURINA_OPEN_DIR_PATH }}/* .
+          rm -rf !(${{ env.PURINA_OPEN_DIR_PATH }})
           ls -R
           echo "PURINA_OPEN_DIR_PATH: ${{ env.PURINA_OPEN_DIR_PATH }}"
       # - name: Set up Python 3.11
