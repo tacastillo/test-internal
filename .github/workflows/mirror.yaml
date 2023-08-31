@@ -1,5 +1,5 @@
 env:
-  PURINA_OPEN_DIR_PATH: python_modules/purina-open/
+  PURINA_OPEN_DIR_PATH: python_modules/purina-open
   PURINA_OPEN_REPO: tacastillo/test-external
 
 on:
@@ -24,7 +24,7 @@ jobs:
       - name: Trim the cone from the sparse checkout
         run: |
           mkdir -p /tmp/purina-open
-          rsync ${{ env.PURINA_OPEN_DIR_PATH }} /tmp/purina-open
+          rsync ${{ env.PURINA_OPEN_DIR_PATH }}/ /tmp/purina-open
           rm -rf *
           rsync /tmp/purina-open/ .
           ls -R -a
