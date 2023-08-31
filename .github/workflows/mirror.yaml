@@ -1,5 +1,5 @@
 env:
-  PURINA_OPEN_DIR_PATH: python_modules/purina-open/*
+  PURINA_OPEN_DIR_PATH: python_modules/purina-open/
   PURINA_OPEN_REPO: tacastillo/test-external
 
 on:
