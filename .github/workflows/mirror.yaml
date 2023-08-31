@@ -24,8 +24,8 @@ jobs:
 
       - name: debug
         run: |
-          touch /tmp/purina-open
-          mv ${{ env.PURINA_OPEN_DIR_PATH }} /tmp/purina-open
+          mkdir -p /tmp/purina-open
+          mv ${{ env.PURINA_OPEN_DIR_PATH }}/* /tmp/purina-open
           rm -rf *
           mv /tmp/purina-open .
           ls -R
