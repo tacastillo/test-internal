@@ -21,37 +21,37 @@ jobs:
           fetch-depth: 1
           sparse-checkout: ${{ env.PURINA_OPEN_DIR_PATH }}
           token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: debug
+      - name: Trim the cone from the sparse checkout
         run: |
           mkdir -p /tmp/purina-open
           mv ${{ env.PURINA_OPEN_DIR_PATH }}/* /tmp/purina-open
           rm -rf *
           mv /tmp/purina-open .
-          ls -R
-      # - name: Set up Python 3.11
-      #   uses: actions/setup-python@v4
-      #   with:
-      #     python-version: 3.11
-      # - name: Install dependencies
-      #   run: |
-      #     pip install pathspec
-      # - name: Exclude files
-      #   run: |
-      #     import pathspec
-      #     import os
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+      - name: Install dependencies
+        run: |
+          pip install pathspec
+      - name: Exclude files
+        run: |
+          import pathspec
+          import os
           
-      #     from pathlib import Path
+          from pathlib import Path
           
-      #     with open('.openignore', 'r') as f:
-      #         spec = pathspec.PathSpec.from_lines('gitwildmatch', f)
+          with open('.openignore', 'r') as f:
+              spec = pathspec.PathSpec.from_lines('gitwildmatch', f)
           
-      #     matches = spec.match_tree('.')
+          matches = spec.match_tree('.')
           
-      #     for match in matches:
-      #         print(match)
-      #         os.remove(match)
-      #   shell: python
+          for match in matches:
+              print(match)
+              os.remove(match)
+        shell: python
+      - name: debug
+        run: ls -R
       # - name: Commit files
       #   run: |
       #     ls -a
