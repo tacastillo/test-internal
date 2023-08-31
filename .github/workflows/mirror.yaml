@@ -1,5 +1,5 @@
 env:
-    PURINA_OPEN_DIR_PATH: python_modules/purina-open/**
+    PURINA_OPEN_DIR_PATH: python_modules/purina-open
     PURINA_OPEN_REPO: tacastillo/test-external
   
 on:
@@ -8,7 +8,7 @@ on:
         - main
         - master
       # paths:
-      #   - ${{ env.PURINA_OPEN_DIR_PATH }}
+      #   - ${{ env.PURINA_OPEN_DIR_PATH }}/**
   
 jobs:
   build:
@@ -26,10 +26,10 @@ jobs:
       #     while read -r pattern; do
       #       find . -type f -name "$pattern" -delete
       #     done < .openignore
-      - name: Install git
-        run: |
-          apt update --yes
-          apt install git --yes
+      # - name: Install git
+      #   run: |
+      #     apt update --yes
+      #     apt install git --yes
       - name: Commit files
         run: |
           git init
