@@ -55,6 +55,8 @@ jobs:
         run: ls -R -a
       - name: Commit files
         run: |
+          rm -rf .git
+          git init
           git config --local user.email "${{ github.event.head_commit.author.email }}"
           git config --local user.name "${{ github.event.head_commit.author.name }}"
       - name: Push to ${{ env.PURINA_OPEN_REPO }}
