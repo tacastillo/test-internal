@@ -7,8 +7,8 @@ on:
     branches:
       - main
       - master
-    paths:
-      - 'python_modules/purina-open/**'
+    # paths:
+    #   - 'python_modules/purina-open/**'
 
 jobs:
   build:
