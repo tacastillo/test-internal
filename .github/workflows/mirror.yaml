@@ -7,8 +7,8 @@ on:
     branches:
       - main
       - master
-    # paths:
-    #   - ${{ env.PURINA_OPEN_DIR_PATH }}/**
+    paths:
+      - '${{ env.PURINA_OPEN_DIR_PATH }}/**'
 
 jobs:
   build:
