@@ -42,7 +42,7 @@ jobs:
           
           from pathlib import Path
           
-          with open('.openignore', 'r') as f:
+          with open('openignore.txt', 'r') as f:
               spec = pathspec.PathSpec.from_lines('gitwildmatch', f)
           
           matches = spec.match_tree('.')
