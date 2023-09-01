@@ -67,6 +67,5 @@ jobs:
           git commit -m "${{ github.event.head_commit.message }}"
       - name: Push to ${{ env.PURINA_OPEN_REPO }}
         run: |
-          git remote add purina_open https://tacastillo:${{ secrets.PAT }}@github.com/${{ env.PURINA_OPEN_REPO }}
-          git branch -u origin/main
-          git push purina_open
+          git remote add origin https://tacastillo:${{ secrets.PAT }}@github.com/${{ env.PURINA_OPEN_REPO }}
+          git push -u origin main
