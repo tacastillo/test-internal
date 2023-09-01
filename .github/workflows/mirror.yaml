@@ -57,6 +57,7 @@ jobs:
         run: |
           rm -rf .git
           git init
+          git config --local init.defaultBranch main
           git config --local --add --bool push.autoSetupRemote true
           git config --local user.email "${{ github.event.head_commit.author.email }}"
           git config --local user.name "${{ github.event.head_commit.author.name }}"
