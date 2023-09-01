@@ -6,7 +6,7 @@ env:
 on:
   push:
     branches:
-      - ${{ env.MAIN_BRANCH_NAME}}
+      - main
     paths:
       - 'python_modules/purina-open/**'
 
