@@ -40,6 +40,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install pathspec
+          ls -a -R
       - name: Exclude files
         run: |
           import pathspec
