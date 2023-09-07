@@ -1,15 +1,20 @@
-env:
-  PURINA_OPEN_DIR_PATH: python_modules/purina-open
-  PURINA_OPEN_REPO: tacastillo/test-external
-  MAIN_BRANCH_NAME: main
+name: Deploy
+
 
 on:
   push:
     branches:
-      - main
+      - master
     paths:
       - 'python_modules/purina-open/**'
-# according to the docs, it should be able to take env vars, but I couldn't it get to work
+      # according to the docs, it should be able to take env vars like PURINA_OPEN_DIR_PATH, but I couldn't it get to work
+
+env:
+  PURINA_OPEN_DIR_PATH: python_modules/purina-open
+  PURINA_OPEN_REPO: tacastillo/test-external
+  PURINA_OPEN_BRANCH_NAME: main
+  PUSHER_EMAIL: timangcas@gmail.com
+  PUSHER_NAME: tacastillo
 
 jobs:
   build:
@@ -24,11 +29,9 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Trim the cone from the sparse checkout
         run: |
-          mkdir -p /tmp/purina-open
-          mv ${{ env.PURINA_OPEN_DIR_PATH }}/* /tmp/purina-open
-          rm -rf *
-          mv /tmp/purina-open/* .
-          ls -R -a
+          # Remove the top-level `.git` ref and go to the purina-open directory
+          rm -rf .git
+          cd ${{ env.PURINA_OPEN_DIR_PATH }}
       - name: Set up Python 3.11
         uses: actions/setup-python@v4
         with:
@@ -41,8 +44,6 @@ jobs:
           import pathspec
           import os
           
-          from pathlib import Path
-          
           with open('openignore.txt', 'r') as f:
               spec = pathspec.PathSpec.from_lines('gitwildmatch', f)
           
@@ -52,20 +53,17 @@ jobs:
               print(match)
               os.remove(match)
         shell: python
-      - name: debug
-        run: ls -R -a
       - name: Commit files
         run: |
-          rm -rf .git
-          git config --global init.defaultBranch ${{ env.MAIN_BRANCH_NAME }} #remove in purina
+          git config --global init.defaultBranch ${{ env.PURINA_OPEN_BRANCH_NAME }}
 
           git init
           git remote add origin https://tacastillo:${{ secrets.PAT }}@github.com/${{ env.PURINA_OPEN_REPO }}
           git fetch origin
 
-          git reset --soft origin/${{ env.MAIN_BRANCH_NAME }}
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
+          git reset --soft origin/${{ env.PURINA_OPEN_BRANCH_NAME }}
+          git config --local user.name ${{ env.PUSHER_NAME }}
+          git config --local user.email ${{ env.PUSHER_EMAIL}} 
           
           git add .
           git commit -m "Mirroring commit ${{ github.event.head_commit.id }} from internal"
