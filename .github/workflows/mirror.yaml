@@ -5,8 +5,8 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'python_modules/purina-open/**'
+    # paths:
+      # - 'python_modules/purina-open/**'
       # according to the docs, it should be able to take env vars like PURINA_OPEN_DIR_PATH, but I couldn't it get to work
 
 env:
