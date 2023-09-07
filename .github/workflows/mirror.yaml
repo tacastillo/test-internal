@@ -29,10 +29,12 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Trim the cone from the sparse checkout
         run: |
-          # Remove the top-level `.git` ref and go to the purina-open directory
-          rm -rf .git
-          cd ${{ env.PURINA_OPEN_DIR_PATH }}
-          ls -a -R
+          # The sparse checkout will have the directory structure of the repo, so we'll crop 
+          # everything the `purina-open` directory and sub-directories
+          mkdir -p /tmp/purina-open
+          mv ${{ env.PURINA_OPEN_DIR_PATH }}/* /tmp/purina-open
+          rm -rf -- ..?* .[!.]* * # delete all files and dotfiles at the cwd
+          mv /tmp/purina-open/* . # move purina-open files back to cwd
       - name: Set up Python 3.11
         uses: actions/setup-python@v4
         with:
